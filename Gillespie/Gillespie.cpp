@@ -1,59 +1,45 @@
 #include <iostream>
+#include <stdlib.h>
 
-#define NUMBER_OF_VARIABLES 6
-#define MAX_TIME 1
-#define NUMBER_OF_EQUATIONS 8
+#define HELP_STRING "This is the help string that needs to be done at some point"
 
-double rates(int* vars, int number)
+void getData(File* f, int** eqs, int* vars)
 {
-  double rate = 0;
-  switch(number)
+  
+}
+
+int main(int argc, char* argv[])
+{
+  FILE* in, out;
+  double updateTime = 0;
+  for(int i = 1; i <= argc; i++)
   {
-  case 0:
- {
- 
- }
-case 1:
-{
-
-}
-case 2:
-{
-
-}
-case 3:
-{
-
-}
-case 4:
-{
-
-}
-case 5:
-{
-
-}
-case 6:
-{
-
-}
-case 7:
-{
-
-}
-case 8:
-{
-
-}
-}
-  return rate;
-}
-
-int main()
-{
+    if(argv[i][0] == '-')
+    {
+      switch(argv[i][1])
+      {
+        case 'h':
+        std::cout << HELP_STRING;
+        return 0;
+        case 'u':
+        updateTime = strtod(argv[i][2], NULL);
+        break;
+        case 'o':
+        out = fopen(argv[i] + 2, "w");
+        if(out == NULL)
+        {
+          std::cout << "Unable to open " << argv[i] + 2 << " for writing." << std::endl;
+        }
+        break;
+        
+      }
+    }
+    };
+  }
+  
   int* vars = new int[NUMBER_OF_VARIABLES];
   
   
-
+  
   delete[] vars;
 }
