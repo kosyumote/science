@@ -3,14 +3,14 @@
 
 #define HELP_STRING "This is the help string that needs to be done at some point"
 
-void getData(File* f, int** eqs, int* vars)
+void getData(File* f, int*** eqs, int** vars)
 {
   
 }
 
 int main(int argc, char* argv[])
 {
-  FILE* in, out;
+  FILE* fin, fout;
   double updateTime = 0;
   for(int i = 1; i <= argc; i++)
   {
@@ -26,19 +26,43 @@ int main(int argc, char* argv[])
         break;
         case 'o':
         out = fopen(argv[i] + 2, "w");
-        if(out == NULL)
+        if(fout == NULL)
         {
           std::cout << "Unable to open " << argv[i] + 2 << " for writing." << std::endl;
         }
         break;
-        
       }
     }
-    };
+    else
+    {
+      if(fin != NULL)
+      {
+        fin = fopen(argv[i], "r");
+        if(fin == NULL)
+        {
+         std::cout << "Unable to read " << argv[i] << std::endl;
+         return 1;
+        }
+      }
+      else
+      {
+       std::cout << "Incorrect usage. Use -h for more information." << std::endl;
+       return 1;
+      }
+    } 
   }
   
-  int* vars = new int[NUMBER_OF_VARIABLES];
+  if(fin == NULL)
+  {
+    std::cout << "No input file specified." << std::endl;
+    return 1;
+  }
   
+  
+  int* vars;
+  int** eqs;
+  
+  getData(fin, &vars, &eqs);
   
   
   delete[] vars;
